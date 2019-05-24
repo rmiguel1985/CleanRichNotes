@@ -25,6 +25,8 @@ import android.app.Application;
  * <p>Define Logging, Dagger and security initializer</p>
  */
 public abstract class BaseApplication extends Application {
+    protected abstract void initializeLogging();
+
     protected abstract void initializeConnectivity();
     protected abstract void initializeDagger();
     protected abstract void initializeDiagnosticTools();

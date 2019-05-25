@@ -1,7 +1,7 @@
 package com.adictosalainformatica.cleanrichnotes.features.list.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,18 +16,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adictosalainformatica.cleanrichnotes.R;
 import com.adictosalainformatica.cleanrichnotes.base.presentation.ViewModelFactory;
+import com.adictosalainformatica.cleanrichnotes.features.add.presentation.EditNote;
 import com.adictosalainformatica.cleanrichnotes.features.list.data.database.Note;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.perf.metrics.AddTrace;
+
+import org.parceler.Parcels;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 import static com.adictosalainformatica.cleanrichnotes.NotesApplication.getDaggerComponent;
+import static com.adictosalainformatica.cleanrichnotes.utils.Constants.ADD_NOTE;
+import static com.adictosalainformatica.cleanrichnotes.utils.Constants.DELETE_NOTE_KEY;
+import static com.adictosalainformatica.cleanrichnotes.utils.Constants.EDIT_NOTE;
+import static com.adictosalainformatica.cleanrichnotes.utils.Constants.NOTE_MODEL;
+import static com.adictosalainformatica.cleanrichnotes.utils.Constants.RQ_ADD_NOTE;
+import static com.adictosalainformatica.cleanrichnotes.utils.Constants.SCREEN_TYPE;
+import static com.adictosalainformatica.cleanrichnotes.utils.Constants.SHOW_NOTE;
 
-public class ListNotesActivity extends AppCompatActivity {
+public class ListNotesActivity extends AppCompatActivity implements NotesAdapter.OnNoteListItemClickedListener, NotesAdapter.OnNoteListItemLongClickedListener {
 
     @Inject ViewModelFactory viewModelFactory;
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
@@ -46,9 +58,10 @@ public class ListNotesActivity extends AppCompatActivity {
         initAction();
 
         floatingActionButton.setOnClickListener(view -> {
-            /*Intent intent = new Intent(this, AddNoteActivity.class);
-            startActivity(intent);*/
-            Log.d("note", "add note clicked");
+            Intent intent = new Intent(this, EditNote.class);
+            intent.putExtra(SCREEN_TYPE, ADD_NOTE);
+            startActivityForResult(intent, RQ_ADD_NOTE);
+            Timber.d("add note clicked");
         });
     }
 
@@ -60,8 +73,10 @@ public class ListNotesActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         adapter = new NotesAdapter();
+        adapter.setOnNoteListItemClickedListener(this);
+        adapter.setOnNoteListItemLongClickedListener(this);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
 
         getList();
     }
@@ -103,6 +118,20 @@ public class ListNotesActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == 20) {
+            Note note = Parcels.unwrap(data.getParcelableExtra(NOTE_MODEL));
+
+            if(data.hasExtra(DELETE_NOTE_KEY))  {
+                notesListViewModel.delete(note);
+            } else {
+                notesListViewModel.save(note);
+            }
+        }
+    }
+
+    @AddTrace(name = "getNotesList")
     public void getList(){
         notesListViewModel.getList().observe(this, adapter::submitList);
     }
@@ -140,4 +169,20 @@ public class ListNotesActivity extends AppCompatActivity {
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
+    @Override
+    public void onNoteListItemClicked(Note note) {
+        Intent intent = new Intent(this, EditNote.class);
+        intent.putExtra(NOTE_MODEL, Parcels.wrap(note));
+        intent.putExtra(SCREEN_TYPE, SHOW_NOTE);
+        startActivityForResult(intent, RQ_ADD_NOTE);
+
+    }
+
+    @Override
+    public void onNoteListItemLongClicked(Note note) {
+        Intent intent = new Intent(this, EditNote.class);
+        intent.putExtra(NOTE_MODEL, Parcels.wrap(note));
+        intent.putExtra(SCREEN_TYPE, EDIT_NOTE);
+        startActivityForResult(intent, RQ_ADD_NOTE);
+    }
 }

@@ -14,10 +14,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.adictosalainformatica.cleanrichnotes.R;
 import com.adictosalainformatica.cleanrichnotes.features.list.data.database.Note;
 
+import java.lang.ref.WeakReference;
+
 public class NotesAdapter extends PagedListAdapter<Note, NotesAdapter.NotesViewHolder> {
 
     NotesAdapter() {
         super(DIFF_CALLBACK);
+    }
+
+    private WeakReference<OnNoteListItemClickedListener> clickedListenerRef;
+    private WeakReference<OnNoteListItemLongClickedListener> longClickedListenerRef;
+
+    public void setOnNoteListItemClickedListener(OnNoteListItemClickedListener listener) {
+        clickedListenerRef = new WeakReference<>(listener);
+    }
+
+    public void setOnNoteListItemLongClickedListener(OnNoteListItemLongClickedListener listener) {
+        longClickedListenerRef = new WeakReference<>(listener);
+    }
+
+    public interface OnNoteListItemClickedListener {
+        void onNoteListItemClicked(Note note);
+    }
+
+    public interface OnNoteListItemLongClickedListener {
+        void onNoteListItemLongClicked(Note note);
     }
 
     @NonNull
@@ -25,7 +46,30 @@ public class NotesAdapter extends PagedListAdapter<Note, NotesAdapter.NotesViewH
     public NotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recyclerview_item, parent, false);
-        return new NotesViewHolder(itemView);
+
+        final NotesViewHolder holder = new NotesViewHolder(itemView);
+
+        itemView.setOnClickListener(view -> {
+            if (clickedListenerRef != null) {
+                OnNoteListItemClickedListener listener = clickedListenerRef.get();
+                if (listener != null && getCurrentList()!=null && !getCurrentList().isEmpty()) {
+                    listener.onNoteListItemClicked(getCurrentList().get(holder.getAdapterPosition()));
+                }
+            }
+        });
+
+        itemView.setOnLongClickListener(view -> {
+            if (longClickedListenerRef != null) {
+                OnNoteListItemLongClickedListener listener = longClickedListenerRef.get();
+                if (listener != null && getCurrentList()!=null && !getCurrentList().isEmpty()) {
+                    listener.onNoteListItemLongClicked(getCurrentList().get(holder.getAdapterPosition()));
+                }
+            }
+
+            return false;
+        });
+
+        return holder;
     }
 
     @Override

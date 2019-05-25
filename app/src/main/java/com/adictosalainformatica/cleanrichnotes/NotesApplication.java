@@ -5,11 +5,13 @@ import com.adictosalainformatica.cleanrichnotes.base.dagger.DaggerNotesComponent
 import com.adictosalainformatica.cleanrichnotes.base.dagger.NotesComponent;
 import com.adictosalainformatica.cleanrichnotes.base.dagger.NotesModule;
 import com.adictosalainformatica.cleanrichnotes.utils.ConnectivityHelper;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import timber.log.Timber;
 
 public class NotesApplication extends BaseApplication {
     private static NotesComponent daggerNotesComponent;
+    private static FirebaseAnalytics firebaseAnalytics;
 
     @Override
     public void onCreate() {
@@ -18,6 +20,7 @@ public class NotesApplication extends BaseApplication {
         initializeLogging();
         initializeDagger();
         initializeConnectivity();
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
     @Override

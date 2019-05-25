@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.firebase.firebase-perf'
+//apply plugin: 'com.google.firebase.firebase-perf'
 
 
 android {
@@ -126,4 +126,9 @@ dependencies {
 
     //Dexter
     implementation "com.karumi:dexter:$dexterVersion"
+
+    //Firebase analytics
+    implementation 'com.google.firebase:firebase-core:16.0.8'
 }
+
+apply plugin: 'com.google.gms.google-services'

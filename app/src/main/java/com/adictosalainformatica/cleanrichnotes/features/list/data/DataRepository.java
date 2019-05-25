@@ -1,6 +1,6 @@
 package com.adictosalainformatica.cleanrichnotes.features.list.data;
 
-import android.app.Application;
+import android.content.Context;
 
 import androidx.paging.DataSource;
 
@@ -8,6 +8,8 @@ import com.adictosalainformatica.cleanrichnotes.features.list.data.database.Note
 import com.adictosalainformatica.cleanrichnotes.features.list.data.database.NotesDao;
 import com.adictosalainformatica.cleanrichnotes.features.list.data.database.NotesDatabase;
 
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,7 +22,7 @@ public class DataRepository {
     private final ExecutorService mIoExecutor;
     private static volatile DataRepository sInstance = null;
 
-    public static DataRepository getInstance(Application application) {
+    public static DataRepository getInstance(Context application) {
         if (sInstance == null) {
             synchronized (DataRepository.class) {
                 if (sInstance == null) {
@@ -44,6 +46,15 @@ public class DataRepository {
 
     public DataSource.Factory<Integer, Note> getFilteredNotes(String text) {
         return mDao.getFilteredNotes(text);
+    }
+
+    public List<Note> getWidgetNotes() {
+        try {
+            return mIoExecutor.submit(mDao::getWidgetNotes).get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void delete(Note note) {

@@ -40,7 +40,8 @@
                 android:layout_marginBottom="@dimen/item_margins"
                 android:visibility="gone"
                 android:src="@drawable/list_item_pined"
-                tools:visibility="visible"/>
+                tools:visibility="visible"
+                android:contentDescription="@string/pinne_icon_description"/>
         </LinearLayout>
 
     <TextView

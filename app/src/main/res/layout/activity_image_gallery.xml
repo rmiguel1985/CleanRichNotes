@@ -20,7 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/relativeLayout">
 
@@ -28,10 +27,10 @@
             android:id="@+id/image_gallery_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="38dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" />
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp" />
 
     </RelativeLayout>
 
@@ -39,7 +38,6 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
 
@@ -49,10 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/getString"
             android:layout_alignBottom="@+id/getString"
-            android:layout_marginLeft="23dp"
             android:layout_marginStart="23dp"
             android:layout_toEndOf="@+id/getString"
-            android:layout_toRightOf="@+id/getString"
             android:background="@android:drawable/ic_search_category_default"
             android:padding="10dp" />
 
@@ -61,7 +57,7 @@
             android:layout_width="250dp"
             android:maxLines="1"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:hint="@string/image_gallery_hint"
             android:padding="10dp"

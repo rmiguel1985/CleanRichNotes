@@ -1,8 +1,16 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.google.firebase.firebase-perf'
 
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('/home/ruben/Documents/keystore/keyStore.jks')
+            storePassword 'yourPassword'
+            keyPassword 'yourPassword'
+            keyAlias 'notesStore'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.adictosalainformatica.cleanrichnotes"
@@ -19,6 +27,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 

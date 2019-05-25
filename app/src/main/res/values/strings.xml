@@ -15,4 +15,6 @@
     <string name="dialog_permission_text">Permissions are needed for this functionality</string>
     <string name="generic_ok">Ok</string>
     <string name="generic_cancel">Cancel</string>
+    <string name="note_title_hint">Title</string>
+    <string name="note_text_hint">Note Text</string>
 </resources>

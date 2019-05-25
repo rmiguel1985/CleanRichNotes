@@ -8,6 +8,7 @@ android {
             storeFile file('/home/ruben/Documents/keystore/keyStore.jks')
             storePassword 'yourPassword'
             keyPassword 'yourPassword'
+            keyAlias 'notesStore'
         }
     }
     compileSdkVersion 28
@@ -26,6 +27,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 

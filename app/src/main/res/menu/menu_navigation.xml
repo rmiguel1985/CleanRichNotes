@@ -10,13 +10,6 @@
         android:title=""/>
 
     <item
-        android:id="@+id/check_list_note"
-        android:icon="@drawable/edit_bottom_btn_todo"
-        android:enabled="true"
-        app:showAsAction="ifRoom"
-        android:title=""/>
-
-    <item
         android:id="@+id/take_photo_note"
         android:icon="@drawable/edit_bottom_btn_take_picture"
         android:enabled="true"

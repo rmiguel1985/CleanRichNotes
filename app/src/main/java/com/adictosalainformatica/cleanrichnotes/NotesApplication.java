@@ -1,7 +1,5 @@
 package com.adictosalainformatica.cleanrichnotes;
 
-import android.os.StrictMode;
-
 import com.adictosalainformatica.cleanrichnotes.base.BaseApplication;
 import com.adictosalainformatica.cleanrichnotes.base.dagger.DaggerNotesComponent;
 import com.adictosalainformatica.cleanrichnotes.base.dagger.NotesComponent;
@@ -59,21 +57,6 @@ public class NotesApplication extends BaseApplication {
                 .notesModule(new NotesModule(this))
                 .build();
         daggerNotesComponent.inject(this);
-    }
-
-    /**
-     * Initialize diagnostic tools
-     *
-     */
-    @Override
-    protected void initializeDiagnosticTools(){
-        if (isDebugBuild()) {
-            final StrictMode.ThreadPolicy strictModeThreadPolicy = new StrictMode.ThreadPolicy.Builder()
-                    .detectAll()
-                    .penaltyDeath()
-                    .build();
-            StrictMode.setThreadPolicy(strictModeThreadPolicy);
-        }
     }
 
     /**

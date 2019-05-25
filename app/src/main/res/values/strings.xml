@@ -17,4 +17,9 @@
     <string name="generic_cancel">Cancel</string>
     <string name="note_title_hint">Title</string>
     <string name="note_text_hint">Note Text</string>
+    <string name="pinne_icon_description">pinned icon</string>
+    <string name="note_image_description">Note image</string>
+    <string name="take_photo_image_description">Camera image</string>
+    <string name="take_photo_camera_button_description">Camera Button</string>
+    <string name="image_gallery_element">Image gallery element</string>
 </resources>

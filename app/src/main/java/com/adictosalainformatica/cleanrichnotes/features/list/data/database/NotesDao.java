@@ -8,6 +8,8 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import java.util.List;
+
 /**
  * Room data access object.
  */
@@ -28,6 +30,9 @@ public interface NotesDao {
 
     @Delete
     void delete(Note note);
+
+    @Query("SELECT * FROM " + DataNotesName.TABLE_NAME + " ORDER BY " + DataNotesName.COL_IS_PINNED + " DESC LIMIT 6")
+    List<Note> getWidgetNotes();
 
     @Query("SELECT * FROM " + DataNotesName.TABLE_NAME  +
             " where text LIKE :text or title like :text ORDER BY " +

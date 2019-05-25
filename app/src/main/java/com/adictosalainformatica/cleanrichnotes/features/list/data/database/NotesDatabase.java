@@ -23,7 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Note.class}, version = 5, exportSchema = false)
+@Database(entities = {Note.class}, version = 6, exportSchema = false)
 public abstract class NotesDatabase extends RoomDatabase {
 
     public abstract NotesDao notesDao();
@@ -65,10 +65,10 @@ public abstract class NotesDatabase extends RoomDatabase {
     @WorkerThread
     private static void fillWithDemoData(Context context) {
         NotesDao dao = getInstance(context).notesDao();
-        JSONArray emoji = loadJsonArray(context);
+        JSONArray note = loadJsonArray(context);
         try {
-            for (int i = 0; i < emoji.length(); i++) {
-                JSONObject item = emoji.getJSONObject(i);
+            for (int i = 0; i < note.length(); i++) {
+                JSONObject item = note.getJSONObject(i);
                 boolean isPinned = false;
 
                 String title = item.getString("title");
@@ -80,7 +80,9 @@ public abstract class NotesDatabase extends RoomDatabase {
                 dao.insert(new Note(item.getInt("id"),
                         item.getString("text"),
                         title,
-                        isPinned));
+                        isPinned,
+                        null,
+                        0));
             }
         } catch (JSONException exception) {
             exception.printStackTrace();

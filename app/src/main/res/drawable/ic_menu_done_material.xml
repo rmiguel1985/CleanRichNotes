@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:height="@dimen/icon_size" android:width="@dimen/icon_size" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:fillColor="@color/edit_activity_bottom_bar_icon_color" android:pathData="M9,18.75 A0.744,0.744,0,0,1,8.47,18.53 L2.47,12.53 L3.53,11.47 L9,16.939 L20.47,5.47 L21.53,6.53 L9.53,18.53 A0.744,0.744,0,0,1,9,18.75 Z"/>
+</vector>

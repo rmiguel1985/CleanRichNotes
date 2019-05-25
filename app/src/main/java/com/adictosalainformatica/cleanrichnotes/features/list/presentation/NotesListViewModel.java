@@ -34,14 +34,14 @@ public class NotesListViewModel extends ViewModel {
         mRepository.delete(note);
     }
 
-    public LiveData<PagedList<Note>> getFilteredList(String text) {
+    public LiveData<PagedList<Note>> getFilteredList(String filterText) {
         PagedList.Config pagedListConfig = new PagedList.Config.Builder()
                 .setEnablePlaceholders(PLACEHOLDERS)
                 .setInitialLoadSizeHint(PAGE_SIZE)
                 .setPageSize(PAGE_SIZE)
                 .build();
 
-        text = "%" + text + "%";
-        return new LivePagedListBuilder<>(mRepository.getFilteredNotes(text), pagedListConfig).build();
+        filterText = "%" + filterText + "%";
+        return new LivePagedListBuilder<>(mRepository.getFilteredNotes(filterText), pagedListConfig).build();
     }
 }

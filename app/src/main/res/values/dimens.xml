@@ -1,6 +1,8 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="item_margins">8dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
     <dimen name="form_margins">15dp</dimen>
     <dimen name="form_margins_small">5dp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
 </resources>

@@ -8,7 +8,7 @@ public final class DataNotesName {
     public static final String TABLE_NAME = "note";
 
     /**
-     * Column name for unicode and used as primary.
+     * Column name for Note id.
      */
     public static final String COL_ID = "id";
 
@@ -18,9 +18,22 @@ public final class DataNotesName {
     public static final String COL_TEXT = "text";
 
     /**
-     * Column name for emoji character.
+     * Column name for Note title
      */
     public static final String COL_TITLE = "title";
 
+    /**
+     * Column name for Note isPinned
+     */
     public static final String COL_IS_PINNED = "isPinned";
+
+    /**
+     * Column name for Note image path
+     */
+    public static final String COL_IMAGE_PATH = "imagePath";
+
+    /**
+     * Column name for Note type
+     */
+    public static final String COL_NOTE_TYPE = "noteType";
 }

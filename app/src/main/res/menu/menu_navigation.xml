@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/text_note"
+        android:icon="@drawable/btn_keyboard_key_material"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title=""/>
+
+    <item
+        android:id="@+id/take_photo_note"
+        android:icon="@drawable/edit_bottom_btn_take_picture"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title=""/>
+
+    <item
+        android:id="@+id/choose_picture"
+        android:icon="@drawable/edit_bottom_btn_choose_picture"
+        android:enabled="true"
+        app:showAsAction="ifRoom"
+        android:title=""/>
+
+
+
+
+
+
+</menu>

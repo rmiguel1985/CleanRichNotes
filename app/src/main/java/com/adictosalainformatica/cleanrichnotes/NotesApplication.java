@@ -1,24 +1,21 @@
 package com.adictosalainformatica.cleanrichnotes;
 
-import android.os.StrictMode;
-
 import com.adictosalainformatica.cleanrichnotes.base.BaseApplication;
 import com.adictosalainformatica.cleanrichnotes.base.dagger.DaggerNotesComponent;
 import com.adictosalainformatica.cleanrichnotes.base.dagger.NotesComponent;
 import com.adictosalainformatica.cleanrichnotes.base.dagger.NotesModule;
-import com.adictosalainformatica.cleanrichnotes.base.dagger.NotesNetworkModule;
 import com.adictosalainformatica.cleanrichnotes.utils.ConnectivityHelper;
+
+import timber.log.Timber;
 
 public class NotesApplication extends BaseApplication {
     private static NotesComponent daggerNotesComponent;
-    private static String API_URL;
-
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        //API_URL = BuildConfig.API_URL + ":" + BuildConfig.API_PORT;
+        initializeLogging();
         initializeDagger();
         initializeConnectivity();
     }
@@ -28,6 +25,17 @@ public class NotesApplication extends BaseApplication {
         super.onTerminate();
 
         daggerNotesComponent = null;
+    }
+
+    /**
+     * Initialize logging only for debug builds
+     *
+     */
+    @Override
+    protected void initializeLogging() {
+        if (isDebugBuild()) {
+            Timber.plant(new Timber.DebugTree());
+        }
     }
 
     /**
@@ -47,24 +55,8 @@ public class NotesApplication extends BaseApplication {
     protected void initializeDagger() {
         daggerNotesComponent = DaggerNotesComponent.builder()
                 .notesModule(new NotesModule(this))
-                .notesNetworkModule(new NotesNetworkModule(API_URL))
                 .build();
         daggerNotesComponent.inject(this);
-    }
-
-    /**
-     * Initialize diagnostic tools
-     *
-     */
-    @Override
-    protected void initializeDiagnosticTools(){
-        if (isDebugBuild()) {
-            final StrictMode.ThreadPolicy strictModeThreadPolicy = new StrictMode.ThreadPolicy.Builder()
-                    .detectAll()
-                    .penaltyDeath()
-                    .build();
-            StrictMode.setThreadPolicy(strictModeThreadPolicy);
-        }
     }
 
     /**
@@ -83,14 +75,5 @@ public class NotesApplication extends BaseApplication {
      */
     public static NotesComponent getDaggerComponent(){
         return daggerNotesComponent;
-    }
-
-    /**
-     * Get Api Url
-     *
-     * @return String api url
-     */
-    public static String getApiUrl() {
-        return API_URL;
     }
 }

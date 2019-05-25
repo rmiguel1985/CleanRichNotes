@@ -4,35 +4,51 @@ package com.adictosalainformatica.cleanrichnotes.features.list.data.database;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import org.parceler.Parcel;
+
 /**
- * A Model class that holds information about the emoji.
- * Class defines a table for the Room database with primary key the {@see #mCode}.
+ * A Model class that holds information about the note.
+ * Class defines a table for the Room database with primary key the {@see id}.
  */
 
+@Parcel
 @Entity(tableName = DataNotesName.TABLE_NAME)
 public class Note {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = DataNotesName.COL_ID)
-    private int id;
+    public int id;
 
     @ColumnInfo(name = DataNotesName.COL_IS_PINNED)
-    private boolean isPinned;
+    public boolean isPinned;
 
     @ColumnInfo(name = DataNotesName.COL_TEXT)
-    private String text;
+    public String text;
 
     @ColumnInfo(name = DataNotesName.COL_TITLE)
-    private String title;
+    public String title;
 
-    public Note(@NonNull int id, String text, String title, boolean isPinned) {
+    @ColumnInfo(name = DataNotesName.COL_IMAGE_PATH)
+    public String imagePath;
+
+    @NonNull
+    @ColumnInfo(name = DataNotesName.COL_NOTE_TYPE)
+    public int noteTYpe;
+
+    @Ignore
+    public Note() { }
+
+    public Note(@NonNull int id, String title, String text, boolean isPinned, String imagePath,@NonNull int noteTYpe) {
         this.id = id;
         this.text = text;
         this.title = title;
         this.isPinned = isPinned;
+        this.noteTYpe = noteTYpe;
+        this.imagePath = imagePath;
     }
 
     @NonNull
@@ -50,5 +66,13 @@ public class Note {
 
     public boolean isPinned() {
         return isPinned;
+    }
+
+    public void setIsPinned(boolean isPinned) {
+        this.isPinned = isPinned;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 }

@@ -1,8 +1,15 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.google.firebase.firebase-perf'
 
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('/home/ruben/Documents/keystore/keyStore.jks')
+            storePassword 'yourPassword'
+            keyPassword 'yourPassword'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.adictosalainformatica.cleanrichnotes"

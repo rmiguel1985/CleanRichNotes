@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adictosalainformatica.cleanrichnotes.R;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -26,8 +28,9 @@ public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryListIt
 
     public ImageGalleryAdapter() { }
 
+    @NotNull
     @Override
-    public ImageGalleryListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ImageGalleryListItemViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(
                 parent.getContext()).inflate(R.layout.image_gallery_list_item, parent, false);
 

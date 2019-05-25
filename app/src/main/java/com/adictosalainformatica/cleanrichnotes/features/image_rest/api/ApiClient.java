@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    public static final String BASE_URL = "https://www.googleapis.com/customsearch/";
+    private static final String BASE_URL = "https://www.googleapis.com/customsearch/";
     private static Retrofit retrofit = null;
 
 

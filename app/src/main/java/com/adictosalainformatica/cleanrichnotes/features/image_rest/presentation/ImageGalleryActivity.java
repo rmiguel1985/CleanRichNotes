@@ -44,6 +44,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
+import static com.adictosalainformatica.cleanrichnotes.utils.Constants.PHOTO_PATH_DOWNLOADED_KEY;
+
 public class ImageGalleryActivity extends AppCompatActivity implements ImageGalleryAdapter.OnImageGalleryListItemClickedListener {
 
     private ApiInterface apiService;
@@ -100,12 +102,12 @@ public class ImageGalleryActivity extends AppCompatActivity implements ImageGall
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
         View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
+
         if (view == null) {
             view = new View(activity);
         }
+
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
@@ -183,7 +185,7 @@ public class ImageGalleryActivity extends AppCompatActivity implements ImageGall
                         progressBar.setVisibility(View.GONE);
                         Timber.d("image downloaded");
                         Intent returnIntent = new Intent();
-                        returnIntent.putExtra("photoPathDownloaded", file.getAbsoluteFile().toString());
+                        returnIntent.putExtra(PHOTO_PATH_DOWNLOADED_KEY, file.getAbsoluteFile().toString());
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();
                     }
@@ -192,9 +194,6 @@ public class ImageGalleryActivity extends AppCompatActivity implements ImageGall
 
                     @Override
                     public void onLoadCleared(@Nullable Drawable placeholder) {
-                        /*Toast.makeText(getApplicationContext(), R.string.error_downloading_image, Toast.LENGTH_LONG).show();
-                        setResult(Activity.RESULT_CANCELED);
-                        finish();*/
                     }
                 });
     }

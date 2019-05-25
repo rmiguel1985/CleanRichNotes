@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".NotesApplication"
@@ -13,14 +16,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".features.add.EditNote"></activity>
-        <activity android:name=".features.list.presentation.ListNotesActivity">
+        <activity android:name=".features.image_rest.presentation.ImageGalleryActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".features.image_camera.TakePhotoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".features.add.presentation.EditNote"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".features.list.presentation.ListNotesActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name="com.adictosalainformatica.cleanrichnotes.widget.NoteAppWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/note_appwidget_info" />
+        </receiver>
+
     </application>
+
+
 
 </manifest>

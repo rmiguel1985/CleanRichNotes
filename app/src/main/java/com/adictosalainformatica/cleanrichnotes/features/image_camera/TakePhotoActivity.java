@@ -19,6 +19,7 @@ import io.fotoapparat.result.PhotoResult;
 import io.fotoapparat.view.CameraView;
 import timber.log.Timber;
 
+import static com.adictosalainformatica.cleanrichnotes.utils.Constants.PHOTO_PATH_KEY;
 import static io.fotoapparat.selector.LensPositionSelectorsKt.back;
 
 public class TakePhotoActivity extends AppCompatActivity {
@@ -80,7 +81,7 @@ public class TakePhotoActivity extends AppCompatActivity {
             Timber.i("photo path: " + absolutePath);
 
             Intent returnIntent = new Intent();
-            returnIntent.putExtra("photoPath", absolutePath);
+            returnIntent.putExtra(PHOTO_PATH_KEY, absolutePath);
 
             setResult(Activity.RESULT_OK,returnIntent);
             finish();

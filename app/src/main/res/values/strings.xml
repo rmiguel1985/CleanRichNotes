@@ -8,4 +8,11 @@
     <string name="error_downloading_image">Error Downloading Image</string>
     <string name="share_note_title">Share Note</string>
     <string name="share_note_with">Share with</string>
+    <string name="dialog_delete_title">Delete note</string>
+    <string name="dialog_delete_text">Are you sure?</string>
+    <string name="dialog_permission_camera_storage_title"><![CDATA[Camera & storage permission]]></string>
+    <string name="dialog_permission_storage_title">Storage permission</string>
+    <string name="dialog_permission_text">Permissions are needed for this functionality</string>
+    <string name="generic_ok">Ok</string>
+    <string name="generic_cancel">Cancel</string>
 </resources>

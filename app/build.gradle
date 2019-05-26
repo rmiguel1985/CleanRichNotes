@@ -5,7 +5,7 @@ apply plugin: 'com.google.firebase.firebase-perf'
 android {
     signingConfigs {
         config {
-            storeFile file('/home/ruben/Documents/keystore/keyStore.jks')
+            storeFile file('keyStore.jks')
             storePassword 'yourPassword'
             keyPassword 'yourPassword'
             keyAlias 'notesStore'

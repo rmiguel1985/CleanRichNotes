@@ -22,4 +22,5 @@
     <string name="take_photo_image_description">Camera image</string>
     <string name="take_photo_camera_button_description">Camera Button</string>
     <string name="image_gallery_element">Image gallery element</string>
+    <string name="note_menu_search">Search</string>
 </resources>
